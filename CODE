@@ -1,0 +1,34 @@
+import re
+racial_slurs = ["bad_word_1", "bad_word_2", "bad_word_3", ...]
+def check_racial_slurs(sentence):
+   sentence = re.sub(r'\W+', ' ', sentence)
+     words = sentence.lower().split()
+    num_racial_slurs = sum(1 for word in words if word in racial_slurs)
+    return num_racial_slurs
+def calculate_profanity_score(sentence):
+    num_racial_slurs = check_racial_slurs(sentence)
+    if num_racial_slurs == 0:
+        return 0
+    elif num_racial_slurs <= 2:
+        return 1
+    elif num_racial_slurs <= 5:
+        return 2
+    else:
+        return 3
+
+
+with open('tweets.txt', 'r') as f:
+    for line in f: 
+        line = line.rstrip('\n')
+        profanity_score = calculate_profanity_score(line)
+        print(line + ': ' + str(profanity_score))
+
+
+
+
+
+
+
+
+
+
